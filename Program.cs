@@ -57,6 +57,28 @@
                     string navn = Console.ReadLine();
 
                     Console.WriteLine($"\nHello \"{navn}\" you are a {faction} {race} {klass}.");
+
+                    // Additional messages based on choice
+                    if (faction == "Horde")
+                    {
+                        Console.WriteLine("For the Horde!");
+                    }
+                    else if (faction == "Alliance")
+                    {
+                        Console.WriteLine("For the Alliance!");
+                    }
+
+                    if (race == "Orc" && klass == "Warrior")
+                    {
+                        Console.WriteLine("Lok'tar Ogar, brave warrior!");
+                    }
+
+                    if (klass == "Mage")
+                    {
+                        Console.WriteLine("May your mana be full.");
+                    }
+                    break;
+
                     break;
                 case "2":
                     Console.WriteLine("Åbner indstillinger ...");
