@@ -3,9 +3,9 @@
     internal class Program
     {
         enum Menustate { StartGame, Settings, HighScore, Credits, Exit }
-        enum Race { Mage, Orc, Elf, Dwarf }
-        enum Class { Warrior, Mage, Rogue }
-        enum Faction { Horde, Alliance }
+        enum Race { Orc=1, Dwarf, Elf, Human}
+        enum Class { Warrior=1, Mage, Rogue }
+        enum Faction { Horde=1, Alliance=2 }
         static void Main(string[] args)
         {
             Console.WriteLine("=== SPILMENU ===");
@@ -62,11 +62,9 @@
                     switch (factionChoise)
                     {
                         case Faction.Horde:
-
                             Console.WriteLine("For the Horde!");
                             break;
                         case Faction.Alliance:
-
                             Console.WriteLine("For the Alliance!");
                             break;
                         default:
