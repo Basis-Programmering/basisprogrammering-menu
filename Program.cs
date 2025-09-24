@@ -2,6 +2,10 @@
 {
     internal class Program
     {
+        enum Menustate { StartGame, Settings, HighScore, Credits, Exit }
+        enum Race { Mage, Orc, Elf, Dwarf }
+        enum Class { Warrior, Mage, Rogue }
+        enum Faction { Horde, Alliance }
         static void Main(string[] args)
         {
             Console.WriteLine("=== SPILMENU ===");
@@ -13,10 +17,11 @@
 
             Console.Write("\nVælg (1-5): ");
             string valg = Console.ReadLine();
+            Menustate menuState = (Menustate)int.Parse(valg)-1;
 
-            switch (valg)
+            switch (menuState)
             {
-                case "1":
+                case Menustate.StartGame:
                     Console.WriteLine("\n=== CHARACTER BUILDER ===");
 
                     Console.WriteLine("Vælg Faction:");
@@ -24,22 +29,19 @@
                     Console.WriteLine("2) Alliance");
                     Console.Write("Valg: ");
                     string factionValg = Console.ReadLine();
-                    string faction = factionValg == "1" ? "Horde"
-                                  : factionValg == "2" ? "Alliance"
-                                  : "Ukendt faction";
 
+                    Faction factionChoise = (Faction)int.Parse(factionValg);
+                                        
                     Console.WriteLine("\nVælg Race:");
                     Console.WriteLine("1) Orc");
                     Console.WriteLine("2) Human");
                     Console.WriteLine("3) Elf");
                     Console.WriteLine("4) Dwarf");
                     Console.Write("Valg: ");
+
                     string raceValg = Console.ReadLine();
-                    string race = raceValg == "1" ? "Orc"
-                               : raceValg == "2" ? "Human"
-                               : raceValg == "3" ? "Elf"
-                               : raceValg == "4" ? "Dwarf"
-                               : "Ukendt race";
+                    Race raceChoise = (Race)int.Parse(raceValg);
+                   
 
                     Console.WriteLine("\nVælg Class:");
                     Console.WriteLine("1) Warrior");
@@ -48,48 +50,49 @@
                     Console.Write("Valg: ");
                     string classValg = Console.ReadLine();
                     //Class is a protected name, uden the mortal kombat writing :)
-                    string klass = classValg == "1" ? "Warrior"
-                               : classValg == "2" ? "Mage"
-                               : classValg == "3" ? "Rogue"
-                               : "Ukendt class";
 
+                    Class ClassChoise = (Class)int.Parse(classValg);
+                    
                     Console.Write("\nSkriv et karakternavn: ");
                     string navn = Console.ReadLine();
 
-                    Console.WriteLine($"\nHello \"{navn}\" you are a {faction} {race} {klass}.");
+                    Console.WriteLine($"\nHello \"{navn}\" you are a {factionChoise} {raceChoise} {ClassChoise}.");
 
-                    // Additional messages based on choice
-                    if (faction == "Horde")
-                    {
-                        Console.WriteLine("For the Horde!");
-                    }
-                    else if (faction == "Alliance")
-                    {
-                        Console.WriteLine("For the Alliance!");
-                    }
 
-                    if (race == "Orc" && klass == "Warrior")
+                    switch (factionChoise)
+                    {
+                        case Faction.Horde:
+
+                            Console.WriteLine("For the Horde!");
+                            break;
+                        case Faction.Alliance:
+
+                            Console.WriteLine("For the Alliance!");
+                            break;
+                        default:
+                            break;
+                    }                  
+
+                    if (raceChoise==Race.Orc && ClassChoise == Class.Warrior)
                     {
                         Console.WriteLine("Lok'tar Ogar, brave warrior!");
                     }
 
-                    if (klass == "Mage")
+                    if (ClassChoise == Class.Mage)
                     {
                         Console.WriteLine("May your mana be full.");
                     }
                     break;
-
-                    break;
-                case "2":
+                case Menustate.Settings:
                     Console.WriteLine("Åbner indstillinger ...");
                     break;
-                case "3":
+                case Menustate.HighScore:
                     Console.WriteLine("Viser highscore ...");
                     break;
-                case "4":
+                case Menustate.Credits:
                     Console.WriteLine("Laver credits ...");
                     break;
-                case "5":
+                case Menustate.Exit:
                     Console.WriteLine("Afslutter. Farvel!");
                     break;
                 default:
